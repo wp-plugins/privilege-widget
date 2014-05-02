@@ -3,7 +3,7 @@
  * Plugin Name: Privilege Widget
  * Plugin URI: http://www.fuzzguard.com.au/plugins/privilege-widget
  * Description: Used to provide Widget display to users based on their Privilege Level (Currently only either logged in/logged out)
- * Version: 1.0
+ * Version: 1.1
  * Author: Benjamin Guy
  * Author URI: http://www.fuzzguard.com.au
  * License: GPL2
@@ -31,11 +31,11 @@
 * Protects code if wordpress breaks
 * @since 0.1
 */
-//if ( ! function_exists( 'is_admin' ) ) {
-//    header( 'Status: 403 Forbidden' );
-//    header( 'HTTP/1.1 403 Forbidden' );
-//    exit();
-//}
+if ( ! function_exists( 'is_admin' ) ) {
+    header( 'Status: 403 Forbidden' );
+    header( 'HTTP/1.1 403 Forbidden' );
+    exit();
+}
 
 class privWidget {
 
@@ -53,11 +53,9 @@ function privilege_widget_form_extend( $instance, $widget ) {
 	$logged_in_out = get_option($privWidget_id.'_priv_widget');
 ?>
 
-
                 <input type="hidden" name="priv-widget-nonce" value="<?php echo wp_create_nonce( 'priv-widget-nonce-name' ); ?>" />
-
-                <div class="field-priv_widget_role priv_widget_logged_in_out_field description-wide" style="margin: 5px 0;">
-                    <span class="description"><?php _e( "Display Mode", 'priv-widget' ); ?></span>
+                <div class="field-priv_widget_role priv_widget_logged_in_out_field description-wide" style="margin: 5px; padding-bottom: 10px; overflow: hidden; border-bottom: 1px solid #DDDDDD;">
+                    <span class="description"><?php _e( "User Restrictions", 'priv-widget' ); ?></span>
                     <br /> <br />
 
                     <input type="hidden" class="widget-id" value="<?php echo $privWidget_id ;?>" />
@@ -93,7 +91,6 @@ function privilege_widget_form_extend( $instance, $widget ) {
                 </div>
 
 <?php
- 		echo "<br />";
  		return $instance;
 	}
 

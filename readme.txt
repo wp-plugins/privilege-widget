@@ -4,7 +4,7 @@ Donate link:
 tags: widget, widgets, privilege, sidebar, sidebars
 Requires at least: 3.9
 Tested up to: 3.9
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,11 @@ You need to add the widget to a sidebar before you can change the display status
 1. View of the rescriction option added to each widget in the admin panel so you can restrict the display of each widget.
 
 == Changelog ==
+
+= 1.1 =
+* Uncommented Wordpress admin class protection coding from testing
+* Changed "Display Mode" to "User Restriction"
+* Added in bottom border to "User Restriction" area in each widget to make the widget area easier to read
 
 = 1.0 =
 * Gold release
