@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 tags: widget, widgets, privilege, sidebar, sidebars
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ This solves the problem of having to modify theme functions.php files to add in 
 == Installation ==
 
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Activate the plugin through the 'Plugins' area in WordPress
 1. Go to Appearance > Widgets
 1. Add a widget to a sidebar.
 1. Edit the widget accordingly.  First select whether you'd like to display the item to all logged in users, all logged out users, Admin Users or All Users (Default).
@@ -33,6 +33,10 @@ You need to add the widget to a sidebar before you can change the display status
 1. View of the rescriction option added to each widget in the admin panel so you can restrict the display of each widget.
 
 == Changelog ==
+
+= 1.2 =
+* Fixed bug where widgets were failing to display in admin panel.
+* Fixed for loop bug in saving privilege widget.
 
 = 1.1 =
 * Uncommented Wordpress admin class protection coding from testing
