@@ -3,7 +3,7 @@
  * Plugin Name: Privilege Widget
  * Plugin URI: http://www.fuzzguard.com.au/plugins/privilege-widget
  * Description: Used to provide Widget display to users based on their Privilege Level (Currently only either logged in/logged out)
- * Version: 1.1
+ * Version: 1.2
  * Author: Benjamin Guy
  * Author URI: http://www.fuzzguard.com.au
  * License: GPL2
@@ -97,19 +97,21 @@ function privilege_widget_form_extend( $instance, $widget ) {
 /**
 * Save the data returned from the users browser in the database
 * @since 0.1
+* @updated 1.2
 */
 function privilege_widget_update($instance, $new_instance, $old_instance) {
+       	$opt_arr = $_POST['priv-widget-logged-in-out'];
+	if (!empty($opt_arr)) {
+		foreach ($opt_arr as $key => $value) {
 
-        $opt_arr = $_POST['priv-widget-logged-in-out'];
-	foreach ($opt_arr as $key => $value) {
-
-        	if ( !empty($value) ) {
-			// Save the posted value in the database
-            		update_option( $key.'_priv_widget', $value );
-        	} else {
-			// Remove if option has no value when posted
-            		delete_option( $key.'_priv_widget' );
-       		 }
+        		if ( !empty($value) ) {
+				// Save the posted value in the database
+            			update_option( $key.'_priv_widget', $value );
+        		} else {
+				// Remove if option has no value when posted
+            			delete_option( $key.'_priv_widget' );
+       			 }
+		}
 	}
 
 	return $instance;
