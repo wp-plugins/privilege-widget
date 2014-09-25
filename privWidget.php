@@ -3,7 +3,7 @@
  * Plugin Name: Privilege Widget
  * Plugin URI: http://www.fuzzguard.com.au/plugins/privilege-widget
  * Description: Used to provide Widget display to users based on their Privilege Level (Currently only either logged in/logged out)
- * Version: 1.2
+ * Version: 1.3
  * Author: Benjamin Guy
  * Author URI: http://www.fuzzguard.com.au
  * License: GPL2
@@ -39,17 +39,10 @@ if ( ! function_exists( 'is_admin' ) ) {
 
 class privWidget {
 
-function privilege_widget_form_extend( $instance, $widget ) {
- 		$row .= "\tid_base}[{$widget->number}][classes]'  id='widget-{$widget->id_base}-{$widget->number}-classes'  class='widefat'>\n";
+function privilege_widget_form_extend( $t, $return, $instance ) {
+
 		
-                /* Get the roles saved for the post. */
-                //$roles = get_post_meta( $item->ID, '_priv_widget', true );
-
-                //$logged_in_out = ! is_array( $roles ) ? $roles : false;
-	$privWidget_id = $widget->id_base."-".$widget->number;
-
-	
-
+	$privWidget_id = $t->id;
 	$logged_in_out = get_option($privWidget_id.'_priv_widget');
 ?>
 
@@ -91,7 +84,8 @@ function privilege_widget_form_extend( $instance, $widget ) {
                 </div>
 
 <?php
- 		return $instance;
+		$return = null;
+		return array($t,$return,$instance);
 	}
 
 /**
@@ -165,14 +159,18 @@ $myprivWidgetClass = new privWidget();
 /**
 * Filter of what function to call to modify the widget output before it is returned to the users browser
 * @since 0.1
+* @updated 1.3
 */
-add_filter( 'sidebars_widgets', array($myprivWidgetClass, 'privilege_widget_filter'), 10);
+if (!is_admin()) {
+	add_filter( 'sidebars_widgets', array($myprivWidgetClass, 'privilege_widget_filter'), 10);
+}
 
 /**
 * Filter of what function to call to modify widget code
 * @since 0.1
+* @updated 1.3
 */
-add_filter('widget_form_callback', array($myprivWidgetClass, 'privilege_widget_form_extend'), 20, 2);
+add_action('in_widget_form', array($myprivWidgetClass, 'privilege_widget_form_extend'), 5, 3);
 
 
 /**
