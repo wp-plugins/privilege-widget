@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 tags: widget, widgets, privilege, sidebar, sidebars
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,12 @@ You need to add the widget to a sidebar before you can change the display status
 1. View of the rescriction option added to each widget in the admin panel so you can restrict the display of each widget.
 
 == Changelog ==
+
+= 1.4 =
+* Added "lang" folder for localization files
+* Added French, German, Spanish and Chinese translations
+* Added .pot file for localization by others.  Located in "lang" folder
+* Added light top and bottom border around extra coding to emphasize restrictions area
 
 = 1.3 =
 * Changed widget hook to utilize in_widget_form to load extra options. Advantage is increased stability of plugin.

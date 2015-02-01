@@ -3,9 +3,10 @@
  * Plugin Name: Privilege Widget
  * Plugin URI: http://www.fuzzguard.com.au/plugins/privilege-widget
  * Description: Used to provide Widget display to users based on their Privilege Level (Currently only either logged in/logged out)
- * Version: 1.3
+ * Version: 1.4
  * Author: Benjamin Guy
  * Author URI: http://www.fuzzguard.com.au
+ * Text Domain: privilege-widget
  * License: GPL2
 
     Copyright 2014  Benjamin Guy  (email: beng@fuzzguard.com.au)
@@ -39,6 +40,17 @@ if ( ! function_exists( 'is_admin' ) ) {
 
 class privWidget {
 
+        /**
+        * Loads localization files for each language
+        * @since 1.4
+        */
+        function _action_init()
+        {
+                // Localization
+                load_plugin_textdomain('privilege-widget', false, 'privilege-widget/lang/');
+        }
+
+
 function privilege_widget_form_extend( $t, $return, $instance ) {
 
 		
@@ -47,8 +59,8 @@ function privilege_widget_form_extend( $t, $return, $instance ) {
 ?>
 
                 <input type="hidden" name="priv-widget-nonce" value="<?php echo wp_create_nonce( 'priv-widget-nonce-name' ); ?>" />
-                <div class="field-priv_widget_role priv_widget_logged_in_out_field description-wide" style="margin: 5px; padding-bottom: 10px; overflow: hidden; border-bottom: 1px solid #DDDDDD;">
-                    <span class="description"><?php _e( "User Restrictions", 'priv-widget' ); ?></span>
+                <div class="field-priv_widget_role priv_widget_logged_in_out_field description-wide" style="margin: 10px 0px; padding: 5px 0px; overflow: hidden; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD;">
+                    <span class="description"><?php _e( "User Restrictions", 'privilege-widget' ); ?></span>
                     <br /> <br />
 
                     <input type="hidden" class="widget-id" value="<?php echo $privWidget_id ;?>" />
@@ -56,28 +68,28 @@ function privilege_widget_form_extend( $t, $return, $instance ) {
                     <div class="logged-input-holder" style="float: left; width: 35%;">
                         <input type="radio" class="widget-logged-in-out" name="priv-widget-logged-in-out[<?php echo $privWidget_id ;?>]" id="priv_widget_logged_out-for-<?php echo $privWidget_id ;?>" <?php checked( 'admin', $logged_in_out ); ?> value="admin" />
                         <label for="priv_widget_admin_user-for-<?php echo $privWidget_id ;?>">
-                            <?php _e( 'Admin Users', 'priv-widget'); ?>
+                            <?php _e( 'Admin Users', 'privilege-widget'); ?>
                         </label>
                     </div>
 
                     <div class="logged-input-holder" style="float: left; width: 35%;">
                         <input type="radio" class="widget-logged-in-out" name="priv-widget-logged-in-out[<?php echo $privWidget_id ;?>]" id="priv_widget_logged_out-for-<?php echo $privWidget_id ;?>" <?php checked( 'out', $logged_in_out ); ?> value="out" />
                         <label for="priv_widget_logged_out-for-<?php echo $privWidget_id ;?>">
-                            <?php _e( 'Logged Out Users', 'priv-widget'); ?>
+                            <?php _e( 'Logged Out Users', 'privilege-widget'); ?>
                         </label>
                     </div>
 
                     <div class="logged-input-holder" style="float: left; width: 35%;">
                         <input type="radio" class="widget-logged-in-out" name="priv-widget-logged-in-out[<?php echo $privWidget_id ;?>]" id="priv_widget_logged_in-for-<?php echo $privWidget_id ;?>" <?php checked( 'in', $logged_in_out ); ?> value="in" />
                         <label for="priv_widget_logged_in-for-<?php echo $privWidget_id ;?>">
-                            <?php _e( 'Logged In Users', 'priv-widget'); ?>
+                            <?php _e( 'Logged In Users', 'privilege-widget'); ?>
                         </label>
                     </div>
 
                     <div class="logged-input-holder" style="float: left; width: 30%;">
                         <input type="radio" class="widget-logged-in-out" name="priv-widget-logged-in-out[<?php echo $privWidget_id ;?>]" id="priv_widget_by_role-for-<?php echo $privWidget_id ;?>" <?php checked( '', $logged_in_out ); ?> value="" />
                         <label for="priv_widget_by_role-for-<?php echo $privWidget_id ;?>">
-                            <?php _e( 'All Users', 'priv-widget'); ?>
+                            <?php _e( 'All Users', 'privilege-widget'); ?>
                         </label>
                     </div>
 
@@ -155,6 +167,12 @@ function privilege_widget_filter( $widget )
 * @since 0.1
 */
 $myprivWidgetClass = new privWidget();
+
+/**
+* Action of what function to call on wordpress initialization
+* @since 1.4
+*/
+add_action('plugins_loaded', array($myprivWidgetClass, '_action_init'));
 
 /**
 * Filter of what function to call to modify the widget output before it is returned to the users browser
