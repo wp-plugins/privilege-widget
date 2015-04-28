@@ -3,7 +3,7 @@
  * Plugin Name: Privilege Widget
  * Plugin URI: http://www.fuzzguard.com.au/plugins/privilege-widget
  * Description: Used to provide Widget display to users based on their Privilege Level (Currently only either logged in/logged out)
- * Version: 1.4
+ * Version: 1.4.1
  * Author: Benjamin Guy
  * Author URI: http://www.fuzzguard.com.au
  * Text Domain: privilege-widget
